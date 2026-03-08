@@ -33,7 +33,7 @@ public class Categoria {
 	    }
 	    
 	    public void setNome(String nome) {
-	        if(nome == null || nome.isEmpty()){
+	        if(nome == null || nome.isBlank()){
 	            throw new IllegalArgumentException("Nome não pode ser vazio");
 	        }
 	        this.nome = nome;
