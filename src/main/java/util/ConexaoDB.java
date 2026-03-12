@@ -26,16 +26,4 @@ public class ConexaoDB {
 		return conexao;
 	}
 	
-	public static void fecharConexao(Connection conexao) {
-		if (conexao != null) {
-			try {
-				conexao.close();
-				System.out.println("Fechei");
-			} catch (SQLException r) {
-				System.err.println("Não fechou");
-				System.err.println("Problema: " + r.getMessage());
-			}
-		}
-	}
-	
 }

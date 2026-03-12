@@ -11,6 +11,16 @@ import model.Categoria;
 import util.ConexaoDB;
 
 public class CategoriaRepository {
+	
+	private static Connection conexao;
+	
+	public CategoriaRepository() {
+		 if(conexao == null) {
+			 conexao = ConexaoDB.getConexao();
+		 }
+	}
+	
+	
 
     private Categoria mapearCategoria(ResultSet rs) throws SQLException {
         Integer id = rs.getInt("id");
@@ -26,7 +36,6 @@ public class CategoriaRepository {
         String sql = "SELECT id, nome FROM categoria ORDER BY nome";
 
         try (
-            Connection conexao = ConexaoDB.getConexao();
             PreparedStatement stmt = conexao.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery()
         ) {
@@ -52,8 +61,7 @@ public class CategoriaRepository {
 
         String sql = "SELECT id, nome FROM categoria WHERE id = ?";
 
-        try (
-            Connection conexao = ConexaoDB.getConexao();
+        try (            
             PreparedStatement stmt = conexao.prepareStatement(sql)
         ) {
 
@@ -83,7 +91,6 @@ public class CategoriaRepository {
         String sql = "INSERT INTO categoria (nome) VALUES (?) RETURNING id";
 
         try (
-            Connection conexao = ConexaoDB.getConexao();
             PreparedStatement stmt = conexao.prepareStatement(sql)
         ) {
 
@@ -115,7 +122,6 @@ public class CategoriaRepository {
         String sql = "UPDATE categoria SET nome = ? WHERE id = ?";
 
         try (
-            Connection conexao = ConexaoDB.getConexao();
             PreparedStatement stmt = conexao.prepareStatement(sql)
         ) {
 
@@ -143,7 +149,6 @@ public class CategoriaRepository {
         String sql = "DELETE FROM categoria WHERE id = ?";
 
         try (
-            Connection conexao = ConexaoDB.getConexao();
             PreparedStatement stmt = conexao.prepareStatement(sql)
         ) {
 

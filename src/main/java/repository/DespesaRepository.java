@@ -13,6 +13,14 @@ import model.Despesa;
 import util.ConexaoDB;
 
 public class DespesaRepository {
+	
+	private static Connection conexao;
+	
+	public DespesaRepository() {
+		 if(conexao == null) {
+			 conexao = ConexaoDB.getConexao();
+		 }// TODO Auto-generated constructor stub
+	}
 
     private Despesa mapearDespesa(ResultSet rs) throws SQLException {
 
@@ -40,7 +48,6 @@ public class DespesaRepository {
         """;
 
         try (
-            Connection conexao = ConexaoDB.getConexao();
             PreparedStatement stmt = conexao.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery()
         ) {
@@ -72,7 +79,6 @@ public class DespesaRepository {
         """;
 
         try (
-            Connection conexao = ConexaoDB.getConexao();
             PreparedStatement stmt = conexao.prepareStatement(sql)
         ) {
 
@@ -109,7 +115,6 @@ public class DespesaRepository {
         """;
 
         try (
-            Connection conexao = ConexaoDB.getConexao();
             PreparedStatement stmt = conexao.prepareStatement(sql)
         ) {
 
@@ -143,7 +148,6 @@ public class DespesaRepository {
         """;
 
         try (
-            Connection conexao = ConexaoDB.getConexao();
             PreparedStatement stmt = conexao.prepareStatement(sql)
         ) {
 
@@ -174,7 +178,6 @@ public class DespesaRepository {
         String sql = "DELETE FROM despesa WHERE id = ?";
 
         try (
-            Connection conexao = ConexaoDB.getConexao();
             PreparedStatement stmt = conexao.prepareStatement(sql)
         ) {
 
@@ -206,7 +209,6 @@ public class DespesaRepository {
         """;
 
         try (
-            Connection conexao = ConexaoDB.getConexao();
             PreparedStatement stmt = conexao.prepareStatement(sql)
         ) {
 
