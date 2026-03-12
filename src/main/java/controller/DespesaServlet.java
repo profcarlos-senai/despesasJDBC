@@ -8,6 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import model.Despesa;
 import repository.DespesaRepository;
@@ -18,7 +20,9 @@ public class DespesaServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     private static final DespesaRepository repository = new DespesaRepository();
-    private static final ObjectMapper mapper = new ObjectMapper();
+    private static final ObjectMapper mapper = new ObjectMapper()
+    	    .registerModule(new JavaTimeModule())
+    	    .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -55,6 +59,7 @@ public class DespesaServlet extends HttpServlet {
         }
 
         preparaResponseJSON(response);
+        System.out.println(mapper.writeValueAsString(despesa));
         mapper.writeValue(response.getWriter(), despesa);
     }
 

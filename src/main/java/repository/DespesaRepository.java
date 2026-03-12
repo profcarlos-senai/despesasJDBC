@@ -16,16 +16,13 @@ public class DespesaRepository {
 
     private Despesa mapearDespesa(ResultSet rs) throws SQLException {
 
-        Categoria categoria = new Categoria(
-                rs.getInt("categoria_id"),
-                rs.getString("categoria_nome")
-        );
-
+        int categoriaId = rs.getInt("categoria_id");
+        Categoria categoria = (new CategoriaRepository()).buscarPorId(categoriaId);
         return new Despesa(
                 rs.getInt("id"),
                 rs.getString("descricao"),
                 rs.getBigDecimal("valor"),
-                rs.getDate("data").toLocalDate(),
+                rs.getDate("data"),
                 categoria
         );
     }
@@ -118,7 +115,7 @@ public class DespesaRepository {
 
             stmt.setString(1, despesa.getDescricao());
             stmt.setBigDecimal(2, despesa.getValor());
-            stmt.setDate(3, Date.valueOf(despesa.getData()));
+            stmt.setDate(3, despesa.getData());
             stmt.setInt(4, despesa.getCategoria().getId());
 
             int linhasAfetadas = stmt.executeUpdate();
@@ -152,7 +149,7 @@ public class DespesaRepository {
 
             stmt.setString(1, despesa.getDescricao());
             stmt.setBigDecimal(2, despesa.getValor());
-            stmt.setDate(3, Date.valueOf(despesa.getData()));
+            stmt.setDate(3, despesa.getData());
             stmt.setInt(4, despesa.getCategoria().getId());
             stmt.setInt(5, despesa.getId());
 

@@ -3,6 +3,7 @@ package modelTest;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,7 @@ class DespesaTest {
         Despesa despesa = new Despesa(
                 "Mercado",
                 new BigDecimal("-50.00"),
-                LocalDate.now(),
+                Date.valueOf(LocalDate.now()),
                 categoria
         );
 
@@ -38,7 +39,7 @@ class DespesaTest {
                 1,
                 "Uber",
                 new BigDecimal("-20.00"),
-                LocalDate.now(),
+                Date.valueOf(LocalDate.now()),
                 categoria
         );
 
@@ -54,7 +55,7 @@ class DespesaTest {
         Despesa despesa = new Despesa(
                 "Cinema",
                 new BigDecimal("-30.00"),
-                LocalDate.now(),
+                Date.valueOf(LocalDate.now()),
                 categoria
         );
 
@@ -71,7 +72,7 @@ class DespesaTest {
         Despesa despesa = new Despesa(
                 "Cinema",
                 new BigDecimal("-30.00"),
-                LocalDate.now(),
+                Date.valueOf(LocalDate.now()),
                 categoria
         );
 
@@ -88,11 +89,11 @@ class DespesaTest {
         Despesa despesa = new Despesa(
                 "Cinema",
                 new BigDecimal("-30.00"),
-                LocalDate.now(),
+                Date.valueOf(LocalDate.now()),
                 categoria
         );
 
-        LocalDate novaData = LocalDate.of(2025, 5, 10);
+        Date novaData = Date.valueOf("2025-05-10");
 
         despesa.setData(novaData);
 
@@ -108,7 +109,7 @@ class DespesaTest {
         Despesa despesa = new Despesa(
                 "Cinema",
                 new BigDecimal("-30.00"),
-                LocalDate.now(),
+                Date.valueOf(LocalDate.now()),
                 categoria1
         );
 
@@ -126,7 +127,7 @@ class DespesaTest {
             new Despesa(
                     null,
                     new BigDecimal("-50.00"),
-                    LocalDate.now(),
+                    Date.valueOf(LocalDate.now()),
                     categoria
             );
         });
@@ -141,7 +142,7 @@ class DespesaTest {
             new Despesa(
                     "Mercado",
                     null,
-                    LocalDate.now(),
+                    Date.valueOf(LocalDate.now()),
                     categoria
             );
         });
@@ -156,7 +157,7 @@ class DespesaTest {
             new Despesa(
                     "Mercado",
                     new BigDecimal("10.00"),
-                    LocalDate.now(),
+                    Date.valueOf(LocalDate.now()),
                     categoria
             );
         });
@@ -184,7 +185,7 @@ class DespesaTest {
             new Despesa(
                     "Mercado",
                     new BigDecimal("-50.00"),
-                    LocalDate.now(),
+                    Date.valueOf(LocalDate.now()),
                     null
             );
         });

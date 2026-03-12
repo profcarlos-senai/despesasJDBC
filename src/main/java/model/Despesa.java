@@ -1,21 +1,21 @@
 package model;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.sql.Date;
 
 public class Despesa {
     
     private Integer id;
     private String descricao;
     private BigDecimal valor;
-    private LocalDate data;
+    private Date data;
     private Categoria categoria;  
     
     public Despesa() {
     }
     
     // Construtor para criar despesa nova (sem ID)
-    public Despesa(String descricao, BigDecimal valor, LocalDate data, Categoria categoria) {
+    public Despesa(String descricao, BigDecimal valor, java.sql.Date data, Categoria categoria) {
     	setDescricao(descricao);
         setValor(valor);
         setData(data);
@@ -23,7 +23,7 @@ public class Despesa {
     }
     
     // Construtor completo (quando buscar do banco)
-    public Despesa(Integer id, String descricao, BigDecimal valor, LocalDate data, Categoria categoria) {
+    public Despesa(Integer id, String descricao, BigDecimal valor, java.sql.Date data, Categoria categoria) {
         this.id = id;
         setDescricao(descricao);
         setValor(valor);
@@ -55,17 +55,17 @@ public class Despesa {
     }
     
     public void setValor(BigDecimal valor) {
-    	if (valor== null || valor.compareTo(BigDecimal.ZERO) >= 0) {
+    	if (valor== null || valor.compareTo(BigDecimal.ZERO) <= 0) {
     		throw new IllegalArgumentException("Valor não pode ser 0 ou nulo");
     	}
         this.valor = valor;
     }
     
-    public LocalDate getData() {
+    public java.sql.Date getData() {
         return data;
     }
     
-    public void setData(LocalDate data) {
+    public void setData(java.sql.Date data) {
     	if(data == null) {
     		throw new IllegalArgumentException("Data não pode ser vazia");
     	}
