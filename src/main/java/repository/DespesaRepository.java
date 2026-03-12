@@ -13,25 +13,15 @@ import model.Despesa;
 import util.ConexaoDB;
 
 public class DespesaRepository {
-	
-	private static Connection conexao;
-	
-	public DespesaRepository() {
-		 if(conexao == null) {
-			 conexao = ConexaoDB.getConexao();
-		 }// TODO Auto-generated constructor stub
-	}
 
     private Despesa mapearDespesa(ResultSet rs) throws SQLException {
 
-        int categoriaId = rs.getInt("categoria_id");
-        Categoria categoria = (new CategoriaRepository()).buscarPorId(categoriaId);
         return new Despesa(
                 rs.getInt("id"),
                 rs.getString("descricao"),
                 rs.getBigDecimal("valor"),
                 rs.getDate("data"),
-                categoria
+                new Categoria(rs.getInt("categoria_id"), rs.getString("categoria_nome"))
         );
     }
 
@@ -48,6 +38,7 @@ public class DespesaRepository {
         """;
 
         try (
+        		Connection conexao = ConexaoDB.getConexao();
             PreparedStatement stmt = conexao.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery()
         ) {
@@ -79,6 +70,7 @@ public class DespesaRepository {
         """;
 
         try (
+        		Connection conexao = ConexaoDB.getConexao();
             PreparedStatement stmt = conexao.prepareStatement(sql)
         ) {
 
@@ -115,6 +107,7 @@ public class DespesaRepository {
         """;
 
         try (
+        		Connection conexao = ConexaoDB.getConexao();
             PreparedStatement stmt = conexao.prepareStatement(sql)
         ) {
 
@@ -148,6 +141,7 @@ public class DespesaRepository {
         """;
 
         try (
+        		Connection conexao = ConexaoDB.getConexao();
             PreparedStatement stmt = conexao.prepareStatement(sql)
         ) {
 
@@ -178,6 +172,7 @@ public class DespesaRepository {
         String sql = "DELETE FROM despesa WHERE id = ?";
 
         try (
+        		Connection conexao = ConexaoDB.getConexao();
             PreparedStatement stmt = conexao.prepareStatement(sql)
         ) {
 
@@ -209,6 +204,7 @@ public class DespesaRepository {
         """;
 
         try (
+        		Connection conexao = ConexaoDB.getConexao();
             PreparedStatement stmt = conexao.prepareStatement(sql)
         ) {
 

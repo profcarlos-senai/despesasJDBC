@@ -1,0 +1,18 @@
+meta {
+  name: muda nome
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{baseurl}}/{{path}}
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "id": 6,
+    "nome": "Juca da Silva Silva"
+  }
+}

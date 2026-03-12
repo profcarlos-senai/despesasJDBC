@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Despesas JDBC Nahan",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

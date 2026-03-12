@@ -10,17 +10,7 @@ import java.util.List;
 import model.Categoria;
 import util.ConexaoDB;
 
-public class CategoriaRepository {
-	
-	private static Connection conexao;
-	
-	public CategoriaRepository() {
-		 if(conexao == null) {
-			 conexao = ConexaoDB.getConexao();
-		 }
-	}
-	
-	
+public class CategoriaRepository {	
 
     private Categoria mapearCategoria(ResultSet rs) throws SQLException {
         Integer id = rs.getInt("id");
@@ -35,11 +25,11 @@ public class CategoriaRepository {
 
         String sql = "SELECT id, nome FROM categoria ORDER BY nome";
 
-        try (
-            PreparedStatement stmt = conexao.prepareStatement(sql);
+        try(
+        		Connection conexao = ConexaoDB.getConexao();
+        		PreparedStatement stmt = conexao.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery()
         ) {
-
             while (rs.next()) {
                 Categoria categoria = mapearCategoria(rs);
                 categorias.add(categoria);
@@ -61,8 +51,9 @@ public class CategoriaRepository {
 
         String sql = "SELECT id, nome FROM categoria WHERE id = ?";
 
-        try (            
-            PreparedStatement stmt = conexao.prepareStatement(sql)
+        try (
+        		Connection conexao = ConexaoDB.getConexao();
+        		PreparedStatement stmt = conexao.prepareStatement(sql)
         ) {
 
             stmt.setInt(1, id);
@@ -91,6 +82,7 @@ public class CategoriaRepository {
         String sql = "INSERT INTO categoria (nome) VALUES (?) RETURNING id";
 
         try (
+        		Connection conexao = ConexaoDB.getConexao();
             PreparedStatement stmt = conexao.prepareStatement(sql)
         ) {
 
@@ -122,6 +114,7 @@ public class CategoriaRepository {
         String sql = "UPDATE categoria SET nome = ? WHERE id = ?";
 
         try (
+        		Connection conexao = ConexaoDB.getConexao();
             PreparedStatement stmt = conexao.prepareStatement(sql)
         ) {
 
@@ -149,6 +142,7 @@ public class CategoriaRepository {
         String sql = "DELETE FROM categoria WHERE id = ?";
 
         try (
+        		Connection conexao = ConexaoDB.getConexao();
             PreparedStatement stmt = conexao.prepareStatement(sql)
         ) {
 
