@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function(){
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
 
-    fetch("despesas/" + id)
+    fetch("api/despesas/" + id)
         .then(res => res.json())
         .then(d => {
 

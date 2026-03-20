@@ -4,7 +4,7 @@
                              http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>nahan</groupId>
+  <groupId>carlos</groupId>
   <artifactId>despesas</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
@@ -43,13 +43,6 @@
       <version>4.0.1</version>
       <scope>provided</scope>
     </dependency>
-
-    <!-- JSON Simple -->
-    <dependency>
-      <groupId>com.googlecode.json-simple</groupId>
-      <artifactId>json-simple</artifactId>
-      <version>1.1.1</version>
-    </dependency>    
   
 	<!-- JACKSON -->
 	<dependency>
@@ -66,7 +59,7 @@
   </dependencies>
 
   <build>
-    <finalName>despesas</finalName>
+    <finalName>despesasCarlos</finalName>
     <plugins>
       <!-- WAR plugin -->
       <plugin>

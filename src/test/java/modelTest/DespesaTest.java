@@ -20,13 +20,13 @@ class DespesaTest {
 
         Despesa despesa = new Despesa(
                 "Mercado",
-                new BigDecimal("-50.00"),
+                new BigDecimal("50.00"),
                 Date.valueOf(LocalDate.now()),
                 categoria
         );
 
         assertEquals("Mercado", despesa.getDescricao());
-        assertEquals(new BigDecimal("-50.00"), despesa.getValor());
+        assertEquals(new BigDecimal("50.00"), despesa.getValor());
         assertEquals(categoria, despesa.getCategoria());
     }
 
@@ -38,7 +38,7 @@ class DespesaTest {
         Despesa despesa = new Despesa(
                 1,
                 "Uber",
-                new BigDecimal("-20.00"),
+                new BigDecimal("20.00"),
                 Date.valueOf(LocalDate.now()),
                 categoria
         );
@@ -54,7 +54,7 @@ class DespesaTest {
 
         Despesa despesa = new Despesa(
                 "Cinema",
-                new BigDecimal("-30.00"),
+                new BigDecimal("30.00"),
                 Date.valueOf(LocalDate.now()),
                 categoria
         );
@@ -71,14 +71,14 @@ class DespesaTest {
 
         Despesa despesa = new Despesa(
                 "Cinema",
-                new BigDecimal("-30.00"),
+                new BigDecimal("30.00"),
                 Date.valueOf(LocalDate.now()),
                 categoria
         );
 
-        despesa.setValor(new BigDecimal("-60.00"));
+        despesa.setValor(new BigDecimal("60.00"));
 
-        assertEquals(new BigDecimal("-60.00"), despesa.getValor());
+        assertEquals(new BigDecimal("60.00"), despesa.getValor());
     }
 
     @Test
@@ -88,7 +88,7 @@ class DespesaTest {
 
         Despesa despesa = new Despesa(
                 "Cinema",
-                new BigDecimal("-30.00"),
+                new BigDecimal("30.00"),
                 Date.valueOf(LocalDate.now()),
                 categoria
         );
@@ -108,7 +108,7 @@ class DespesaTest {
 
         Despesa despesa = new Despesa(
                 "Cinema",
-                new BigDecimal("-30.00"),
+                new BigDecimal("30.00"),
                 Date.valueOf(LocalDate.now()),
                 categoria1
         );
@@ -126,7 +126,7 @@ class DespesaTest {
         assertThrows(IllegalArgumentException.class, () -> {
             new Despesa(
                     null,
-                    new BigDecimal("-50.00"),
+                    new BigDecimal("50.00"),
                     Date.valueOf(LocalDate.now()),
                     categoria
             );
@@ -149,14 +149,22 @@ class DespesaTest {
     }
 
     @Test
-    void deveriaLancarExcecaoQuandoValorForZeroOuPositivo() {
+    void deveriaLancarExcecaoQuandoValorForZeroOuNegativo() {
 
         Categoria categoria = new Categoria("Alimentação");
 
         assertThrows(IllegalArgumentException.class, () -> {
             new Despesa(
                     "Mercado",
-                    new BigDecimal("10.00"),
+                    new BigDecimal("0.00"),
+                    Date.valueOf(LocalDate.now()),
+                    categoria
+            );
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Despesa(
+                    "Mercado",
+                    new BigDecimal("-10.00"),
                     Date.valueOf(LocalDate.now()),
                     categoria
             );
@@ -171,7 +179,7 @@ class DespesaTest {
         assertThrows(IllegalArgumentException.class, () -> {
             new Despesa(
                     "Mercado",
-                    new BigDecimal("-50.00"),
+                    new BigDecimal("50.00"),
                     null,
                     categoria
             );
@@ -184,7 +192,7 @@ class DespesaTest {
         assertThrows(IllegalArgumentException.class, () -> {
             new Despesa(
                     "Mercado",
-                    new BigDecimal("-50.00"),
+                    new BigDecimal("50.00"),
                     Date.valueOf(LocalDate.now()),
                     null
             );

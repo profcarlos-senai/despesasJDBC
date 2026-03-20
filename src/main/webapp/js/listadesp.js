@@ -1,42 +1,35 @@
-/********************************************** 
- * listadesp.js
- * script de listadesp.html
-*/
+const tabela = document.querySelector("#tabela tbody");
 
-document.addEventListener("DOMContentLoaded", function () {
+document.getElementById("btnCarregar").addEventListener("click", () => {
 
-    document.getElementById("btnCarregar").addEventListener("click", function () {
+    fetch("api/despesas")
+        .then(res => res.json())
+        .then(lista => {
 
-        fetch("despesas/")
-            .then(res => res.json())
-            .then(dados => {
+            tabela.innerHTML = "";
 
-				// joga o corpo da tabela numa var
-                const tbody = document.querySelector("#tabela tbody");
-				
-				// zera o html do corpo da tabela
-                tbody.innerHTML = "";
+            lista.forEach(d => {
 
-                dados.forEach(d => { // vasculha o array de despesas
+                tabela.innerHTML += `
+                    <tr style="cursor:pointer" onclick="abrirModal(${d.id})">
+                        <td>${d.descricao}</td>
+                        <td>${d.valor}</td>
+                        <td>${d.data}</td>
+                        <td>${d.categoria.nome}</td>
+                    </tr>
+                `;
+            });
 
-					// cria uma linha
-                    const linha = document.createElement("tr");
-
-					// escreve a linha
-					linha.innerHTML = `
-					    <td><a href="mostradesp.html?id=${d.id}">${d.descricao}</a></td>
-					    <td>${d.valor}</td>
-					    <td>${d.data}</td>
-					    <td>${d.categoria.nome}</td>
-					`;
-
-					// adiciona essa linha na tabela
-                    tbody.appendChild(linha);
-                });
-
-            })
-            .catch(err => console.error(err));
-
-    });
+        });
 
 });
+
+function abrirModal(id) {
+
+    const iframe = document.getElementById("iframeDespesa");
+
+    iframe.src = `mostradesp.html?id=${id}`;
+
+    const modal = new bootstrap.Modal(document.getElementById('modalDespesa'));
+    modal.show();
+}

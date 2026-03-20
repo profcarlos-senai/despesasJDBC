@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import model.Categoria;
 import repository.CategoriaRepository;
 
-@WebServlet("/categorias/*")
+@WebServlet("/api/categorias/*")
 public class CategoriaServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -42,7 +42,7 @@ public class CategoriaServlet extends HttpServlet {
     protected void doPut(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-    	// traduz o JSON para objeto
+    		// traduz o JSON para objeto
         Categoria categoria = mapper.readValue(request.getReader(), Categoria.class);
 
         // grava no banco de dados

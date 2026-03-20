@@ -14,7 +14,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import model.Despesa;
 import repository.DespesaRepository;
 
-@WebServlet("/despesas/*")
+@WebServlet("/api/despesas/*")
 public class DespesaServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -83,10 +83,13 @@ public class DespesaServlet extends HttpServlet {
     protected void doPut(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        Despesa despesa = mapper.readValue(request.getReader(), Despesa.class);
+    		// traduz o JSON para objeto
+    		Despesa despesa = mapper.readValue(request.getReader(), Despesa.class);
 
+    		// grava no banco de dados
         boolean atualizou = repository.atualizar(despesa);
 
+        // escreve a resposta
         if (atualizou) {
             mapper.writeValue(response.getWriter(), despesa);
         } else {
